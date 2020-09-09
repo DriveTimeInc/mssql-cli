@@ -68,7 +68,11 @@ def run_cli_with(options):
                 except OSError as e:
                     click.secho(str(e), err=True, fg='red')
                     sys.exit(1)
-            mssqlcli.execute_query(text)
+            output, metaData = mssqlcli.execute_query(text)
+            if metaData.successful is False:
+                click.secho(str(output), err=True, fg='red')
+                sys.exit(1)
+
     finally:
         mssqlcli.shutdown()
 

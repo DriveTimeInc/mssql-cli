@@ -372,10 +372,10 @@ class MssqlCli(object):
             output = self._execute_interactive_command(text)
         else:
             # non-interactive mode
-            output, _ = self._evaluate_command(text)
+            output, metaData = self._evaluate_command(text)
 
         self._output_query(output)
-        return output
+        return output, metaData
 
     def _output_query(self, output):
         """ Specifies how query output is handled """
